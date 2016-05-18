@@ -1,4 +1,4 @@
-package graphics;
+package com.djdarkside.game.graphics;
 
 import java.util.Random;
 

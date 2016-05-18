@@ -1,3 +1,5 @@
+package com.djdarkside.game;
+
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -7,7 +9,7 @@ import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
-import graphics.Display;
+import com.djdarkside.game.graphics.Display;
 
 
 public class Game extends Canvas implements Runnable {
