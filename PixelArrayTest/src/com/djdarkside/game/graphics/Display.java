@@ -24,7 +24,7 @@ public class Display {
 		}
  	}
 	
-	public void render() {
+	public void render() {  //Temp Tile Render
 		for (int y = 0; y < height; y++) {
 			int yy = y;
 			//if (yy < 0 || yy >= height) break;
