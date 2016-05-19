@@ -10,7 +10,10 @@ import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 
 import com.djdarkside.game.graphics.Display;
-
+import com.djdarkside.game.graphics.Sprite;
+import com.djdarkside.game.keyboard.Keyboard;
+import com.djdarkside.game.level.Tile;
+import com.djdarkside.game.level.tiles.WaterTile;
 
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = -3476412947826110362L;
@@ -28,28 +31,42 @@ public class Game extends Canvas implements Runnable {
 	private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData(); //Allows up to modify the image
 	
 	private Display display;	
+	private Keyboard key;
 	
 	public Game() {
 		Dimension size = new Dimension(width * scale, height * scale);
 		setPreferredSize(size);		
 		display = new Display(width, height);
 		frame = new JFrame();
+		key = new Keyboard();
+		addKeyListener(key);
 	}
 	
-	public void update() {		
+	int x = 0;
+	int y = 0;
+	public void update() {	
+		key.update();
+		if (key.up) y--;
+		if (key.down) y++;
+		if (key.left) x--;
+		if (key.right) x++;
+		
 	}
 	
 	public void render() {
 		BufferStrategy bs = this.getBufferStrategy(); 
 		if (bs == null) { createBufferStrategy(3); return; }
+		
 		display.clear(); //clears the screen every frame		
-		display.render(); //renders new frame
+		display.renderSprite(x,y); //renders new frame
+		
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = display.pixels[i];
 		}		
+		
 		Graphics g = bs.getDrawGraphics();		
 		{
-			g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+			g.drawImage(image, 0, 0, getWidth(), getHeight(), null);			
 		}		
 		g.dispose();
 		bs.show();

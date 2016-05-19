@@ -6,6 +6,18 @@ public class Sprite {
 	public int[] pixels;
 	protected SpriteSheet sheet;
 	public final int SIZE;
+	
+	public static Sprite tile1 = new Sprite(32, 0, 0, SpriteSheet.tile1);
+	
+	public Sprite(int size, int x, int y, SpriteSheet sheet) {
+		SIZE = size;
+		pixels = new int [SIZE * SIZE];
+		this.x = x * size;
+		this.y = y * size;
+		this.sheet = sheet;
+		load();
+		
+	}
 
 	public Sprite(int x, int y, int width, int height, SpriteSheet sheet) {
 		SIZE = -1;
@@ -34,9 +46,9 @@ public class Sprite {
 	}
 	
 	private void load() {
-		for (int y = 0; y < height; y++) {
-			for (int x = 0; x < width; x++) {
-				pixels[x + y * width] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.SPRITE_WIDTH];
+		for (int y = 0; y < SIZE; y++) {
+			for (int x = 0; x < SIZE; x++) {
+				pixels[x + y * SIZE] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.SIZE];
 			}
 		}
 	}

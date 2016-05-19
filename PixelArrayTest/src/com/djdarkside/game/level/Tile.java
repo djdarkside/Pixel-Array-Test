@@ -1,6 +1,7 @@
 package com.djdarkside.game.level;
 import com.djdarkside.game.graphics.Display;
 import com.djdarkside.game.graphics.Sprite;
+import com.djdarkside.game.level.tiles.WaterTile;
 
 public abstract class Tile {
 
