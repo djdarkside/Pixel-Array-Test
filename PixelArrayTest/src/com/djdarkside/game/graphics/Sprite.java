@@ -7,7 +7,8 @@ public class Sprite {
 	protected SpriteSheet sheet;
 	public final int SIZE;
 	
-	public static Sprite tile1 = new Sprite(32, 0, 0, SpriteSheet.tile1);
+	public static Sprite tile1 = new Sprite(32, 0, 0, SpriteSheet.sheet);
+	public static Sprite splash = new Sprite(32, 0, 0, SpriteSheet.splash);
 	
 	public Sprite(int size, int x, int y, SpriteSheet sheet) {
 		SIZE = size;

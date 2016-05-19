@@ -12,7 +12,8 @@ public class SpriteSheet {
 	public int[] pixels;
 	public final int SPRITE_WIDTH, SPRITE_HEIGHT, SIZE;
 	
-	public static SpriteSheet tile1 = new SpriteSheet("/waterTile.png", 32);
+	public static SpriteSheet sheet = new SpriteSheet("/sheet1.png", 256);
+	public static SpriteSheet splash = new SpriteSheet("/player.png", 32);
 	
 	public SpriteSheet(String path, int size) {
 		SPRITE_WIDTH = -1;

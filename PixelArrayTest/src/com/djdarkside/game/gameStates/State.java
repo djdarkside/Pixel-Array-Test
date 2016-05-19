@@ -1,7 +1,6 @@
 package com.djdarkside.game.gameStates;
 
-public enum GameStateID {
-
+public enum State {
 	SplashScreen(),
 	StartMenu(),
 	IntroLevel(),
@@ -11,3 +10,4 @@ public enum GameStateID {
 	GameMenu(),
 	Exit()	
 }
+

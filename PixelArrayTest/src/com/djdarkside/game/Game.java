@@ -1,7 +1,9 @@
 package com.djdarkside.game;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -9,6 +11,8 @@ import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
+import com.djdarkside.game.gameStates.SplashScreen;
+import com.djdarkside.game.gameStates.State;
 import com.djdarkside.game.graphics.Display;
 import com.djdarkside.game.graphics.Sprite;
 import com.djdarkside.game.keyboard.Keyboard;
@@ -32,6 +36,11 @@ public class Game extends Canvas implements Runnable {
 	
 	private Display display;	
 	private Keyboard key;
+	private SplashScreen SS;
+	
+	public static State gameState = State.SplashScreen;
+	
+	
 	
 	public Game() {
 		Dimension size = new Dimension(width * scale, height * scale);
@@ -40,6 +49,8 @@ public class Game extends Canvas implements Runnable {
 		frame = new JFrame();
 		key = new Keyboard();
 		addKeyListener(key);
+		SS = new SplashScreen(this, display);
+		
 	}
 	
 	int x = 0;
@@ -58,16 +69,21 @@ public class Game extends Canvas implements Runnable {
 		if (bs == null) { createBufferStrategy(3); return; }
 		
 		display.clear(); //clears the screen every frame		
-		display.renderSprite(x,y); //renders new frame
+		//display.renderSprite(x,y); //renders new frame
 		
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = display.pixels[i];
 		}		
 		
-		Graphics g = bs.getDrawGraphics();		
+		Graphics g = bs.getDrawGraphics();	
+		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);		
 		{
-			g.drawImage(image, 0, 0, getWidth(), getHeight(), null);			
-		}		
+			if (gameState == State.SplashScreen) {
+				SS.render(g);
+			} else if(gameState == State.GameMenu) {
+				//Do Stuff
+			}
+		}			
 		g.dispose();
 		bs.show();
 	}

@@ -35,7 +35,7 @@ public class Display {
 			for (int x = 0; x < width; x++) {	
 				int xp = (x + xOffset);
 				if (xp < 0 || xp >= width) continue;
-				pixels[xp + yp * width] = Sprite.tile1.pixels[(x & 31) + (y & 31) * Sprite.tile1.SIZE];
+				pixels[xp + yp * width] = Sprite.splash.pixels[(x & 31) + (y & 31) * Sprite.splash.SIZE];
 			}
 		}
 	}
