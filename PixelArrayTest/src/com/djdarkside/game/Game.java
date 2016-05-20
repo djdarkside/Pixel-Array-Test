@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -38,7 +39,7 @@ public class Game extends Canvas implements Runnable {
 	private Keyboard key;
 	private SplashScreen SS;
 	
-	public static State gameState = State.SplashScreen;
+	public State gameState = State.SplashScreen;
 	
 	
 	
@@ -49,39 +50,43 @@ public class Game extends Canvas implements Runnable {
 		frame = new JFrame();
 		key = new Keyboard();
 		addKeyListener(key);
-		SS = new SplashScreen(this, display);
-		
+		SS = new SplashScreen(this, display);		
 	}
 	
 	int x = 0;
 	int y = 0;
-	public void update() {	
-		key.update();
-		if (key.up) y--;
-		if (key.down) y++;
-		if (key.left) x--;
-		if (key.right) x++;
-		
+	public void update() {
+		SS.update();
+		if (gameState == State.GameMenu) {
+			key.update();
+			if (key.up) y--;
+			if (key.down) y++;
+			if (key.left) x--;
+			if (key.right) x++;
+		}
 	}
 	
 	public void render() {
 		BufferStrategy bs = this.getBufferStrategy(); 
-		if (bs == null) { createBufferStrategy(3); return; }
+		if (bs == null) { createBufferStrategy(3); return; }		
+		display.clear(); //clears the screen every frame			
 		
-		display.clear(); //clears the screen every frame		
-		
-		for (int i = 0; i < pixels.length; i++) {
-			pixels[i] = display.pixels[i];
-		}		
-		
-		display.renderSprite(x,y); //renders new frame
+				
 		Graphics g = bs.getDrawGraphics();	
+		Graphics2D g2d = (Graphics2D) bs.getDrawGraphics();	
+		
+		/////////////////////////////////////////////////////////////////////////
+		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);		
 		{
-			g.drawImage(image, 0, 0, getWidth(), getHeight(), null);		
 			if (gameState == State.SplashScreen) {
-				SS.render(g);
+				SS.render(g2d);
 			} else if(gameState == State.GameMenu) {
-				//Do Stuff
+				display.renderSprite(x,y); //renders new frame
+			//////////////////////////////////////////////////////
+				for (int i = 0; i < pixels.length; i++) {
+					pixels[i] = display.pixels[i];
+				}
+			//////////////////////////////////////////////////////
 			}
 		}			
 		g.dispose();
