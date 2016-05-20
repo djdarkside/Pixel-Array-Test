@@ -34,27 +34,29 @@ public class SplashScreen {
 		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);	
 	    
-		Font font = new Font("arial" , 1, 50);
+		Font font = new Font("arial" , 1, 40);
 		g2d.setColor(Color.white);
 		g2d.setFont(font);
 		
 	//Splash Screen Sequence	
 		if (show && seq == 0) {			
 			alpha += 0.00005f;
-			g2d.drawString("Created by: ", 100 + time, 175);
-	    	if (alpha >= 1.0f) { 
+			g2d.drawString("Created by", 75 + time, 175+time);
+	    	if (alpha >= 0.8f) { 
 	    		alpha = 0.0f;
 	    		seq = 1;
-	    		show = false;	
+	    		delay();
+	    		show = false;	    		
 	    	}  
 		}
     	show = true;
 		if (show && seq == 1) {
 			alpha += 0.00005f;
-			g2d.drawString("Me ", game.getWindowWidth() / 2 - 20, 175 + time);
-	    	if (alpha >= 1.0f) { 
+			g2d.drawString("Mitchell Baptist", game.getWindowWidth() / 2 - 150, 175 + time);
+	    	if (alpha >= 0.8f) { 
 	    		alpha = 0.0f;
 	    		seq = 2;
+	    		delay();
 	    		show = false;	    		
 	    	}    	
 		}
@@ -62,22 +64,13 @@ public class SplashScreen {
 		if (show && seq == 2) {
 			alpha += 0.00005f;
 			g.drawString("2016", game.getWindowWidth() - 150, game.getWindowHeight()-20);
-	    	if (alpha >= 1.0f) { 
+	    	if (alpha >= 0.8f) { 
 	    		alpha = 0.0f;
 	    		seq = 3;
+	    		delay();
 	    		show = false;	    		
 	    	} 
 		}
-
-		
-		
-		
-    	
-    	
-    	//g2d.setColor(Color.black);
-    	//g2d.drawString("Created by: ", 100 + time, 175);
-		
-
 	}
 	
 	public void update() {
@@ -86,9 +79,9 @@ public class SplashScreen {
 		}
 	}	
 	
-	public void delay() {
+	private void delay() {
 		try {
-			Thread.sleep(30);
+			Thread.sleep(750);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
