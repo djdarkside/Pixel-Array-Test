@@ -69,15 +69,15 @@ public class Game extends Canvas implements Runnable {
 		if (bs == null) { createBufferStrategy(3); return; }
 		
 		display.clear(); //clears the screen every frame		
-		//display.renderSprite(x,y); //renders new frame
 		
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = display.pixels[i];
 		}		
 		
+		display.renderSprite(x,y); //renders new frame
 		Graphics g = bs.getDrawGraphics();	
-		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);		
 		{
+			g.drawImage(image, 0, 0, getWidth(), getHeight(), null);		
 			if (gameState == State.SplashScreen) {
 				SS.render(g);
 			} else if(gameState == State.GameMenu) {

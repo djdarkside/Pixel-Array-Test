@@ -23,6 +23,6 @@ public class SplashScreen {
 		g.setFont(font);
 		//g.drawRect(100, 100, 32, 64);
 		g.drawString("Created by: ", game.getWindowWidth() / 2, game.getWindowHeight() / 2);	
-		display.renderSprite(0, 0);
+		
 	}
 }
