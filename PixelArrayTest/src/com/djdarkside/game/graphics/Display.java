@@ -9,9 +9,8 @@ public class Display {
 	public int width, height;
 	public int[] pixels;
 	private Random r = new Random();
-	public final int MAP_SIZE = 128;
-	//public final int MAP_SIZE_MASK = MAP_SIZE -1;
-	//public int[] tiles = new int [MAP_SIZE * MAP_SIZE];
+	Sprite sprite;
+	private final int ALPHA_COL = 0xffff00ff;
 	
 	int time = 0;
 	int counter = 0;
@@ -20,11 +19,6 @@ public class Display {
 		this.width = width;
 		this.height = height;
 		pixels = new int[width * height];		
-		
-		//for (int i = 0; i < MAP_SIZE * MAP_SIZE; i++) {
-		//	tiles[i] = r.nextInt(0xffffff);
-		//	tiles[0] = 0;
-		//}
  	}
 	
 	
@@ -36,6 +30,18 @@ public class Display {
 				int xp = (x + xOffset);
 				if (xp < 0 || xp >= width) continue;
 				pixels[xp + yp * width] = Sprite.splash.pixels[(x & 31) + (y & 31) * Sprite.splash.SIZE];
+			}
+		}
+	}
+	
+	public void renderSprite(int xp, int yp, Sprite sprite, boolean fixed) {
+		for (int y = 0; y < sprite.getSpriteHeight(); y++) {
+			int ya = y + yp;
+			for (int x = 0; x < sprite.getSpriteWidth(); x++) {
+				int xa = x + xp;
+				if (xa < 0 || xa >= width || ya < 0 || ya >= height) continue;
+				int col = sprite.pixels[x + y * sprite.getSpriteWidth()];
+				if (col != ALPHA_COL && col != 0xff7f007f) pixels[xa + ya * width] = col;
 			}
 		}
 	}

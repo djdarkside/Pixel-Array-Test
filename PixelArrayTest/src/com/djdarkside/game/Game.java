@@ -81,7 +81,8 @@ public class Game extends Canvas implements Runnable {
 			if (gameState == State.SplashScreen) {
 				SS.render(g2d);
 			} else if(gameState == State.GameMenu) {
-				display.renderSprite(x,y); //renders new frame
+				display.renderSprite(200, 200, Sprite.splash, true);
+				//display.renderSprite(x,y); //renders new frame
 			//////////////////////////////////////////////////////
 				for (int i = 0; i < pixels.length; i++) {
 					pixels[i] = display.pixels[i];
