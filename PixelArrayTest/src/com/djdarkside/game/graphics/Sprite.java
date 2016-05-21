@@ -2,17 +2,21 @@ package com.djdarkside.game.graphics;
 
 public class Sprite {
 
-	private int x, y, width, height;
+	private int x, y;
+	public int width, height;
 	public int[] pixels;
 	protected SpriteSheet sheet;
 	public final int SIZE;
 	
-	public static Sprite tile1 = new Sprite(32, 0, 0, SpriteSheet.sheet);
-	public static Sprite splash = new Sprite(32, 0, 0, SpriteSheet.splash);
+	public static Sprite tile1 = new Sprite(0, 0, 32, 32, SpriteSheet.sheet);
+	public static Sprite player1 = new Sprite(0, 0, 32, 32, SpriteSheet.player);
+	public static Sprite player2 = new Sprite(1, 0, 32, 32, SpriteSheet.player);
 	
 	public Sprite(int size, int x, int y, SpriteSheet sheet) {
 		SIZE = size;
-		pixels = new int [SIZE * SIZE];
+		height = size;
+		width = size;
+		pixels = new int [width * height];
 		this.x = x * size;
 		this.y = y * size;
 		this.sheet = sheet;
@@ -21,7 +25,7 @@ public class Sprite {
 	}
 
 	public Sprite(int x, int y, int width, int height, SpriteSheet sheet) {
-		SIZE = -1;
+		SIZE = (width == height) ? width: width;
 		this.width = width;
 		this.height = height;
 		pixels = new int [width * height];
@@ -47,9 +51,9 @@ public class Sprite {
 	}
 	
 	private void load() {
-		for (int y = 0; y < SIZE; y++) {
-			for (int x = 0; x < SIZE; x++) {
-				pixels[x + y * SIZE] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.SIZE];
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				pixels[x + y * width] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.SPRITE_WIDTH];
 			}
 		}
 	}

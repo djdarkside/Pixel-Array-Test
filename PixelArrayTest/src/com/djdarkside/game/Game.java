@@ -19,6 +19,8 @@ import com.djdarkside.game.graphics.Sprite;
 import com.djdarkside.game.keyboard.Keyboard;
 import com.djdarkside.game.level.Tile;
 import com.djdarkside.game.level.tiles.WaterTile;
+import com.djdarkside.game.player.Player;
+import com.djdarkside.game.player.Player2;
 
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = -3476412947826110362L;
@@ -39,9 +41,10 @@ public class Game extends Canvas implements Runnable {
 	private Keyboard key;
 	private SplashScreen SS;
 	
-	public State gameState = State.SplashScreen;
+	private Player player;
+	private Player2 player2;
 	
-	
+	public State gameState = State.Game;	
 	
 	public Game() {
 		Dimension size = new Dimension(width * scale, height * scale);
@@ -50,19 +53,19 @@ public class Game extends Canvas implements Runnable {
 		frame = new JFrame();
 		key = new Keyboard();
 		addKeyListener(key);
-		SS = new SplashScreen(this, display);		
+		SS = new SplashScreen(this, display);
+		player = new Player(15, height - 32,key);
+		player2 = new Player2(300, height - 32,key);
 	}
 	
-	int x = 0;
-	int y = 0;
 	public void update() {
-		SS.update();
-		if (gameState == State.GameMenu) {
-			key.update();
-			if (key.up) y--;
-			if (key.down) y++;
-			if (key.left) x--;
-			if (key.right) x++;
+		key.update();
+		
+		if (gameState == State.SplashScreen) {
+			SS.update();		
+		} else if (gameState == State.Game) {
+			player.update();
+			player2.update();
 		}
 	}
 	
@@ -80,9 +83,12 @@ public class Game extends Canvas implements Runnable {
 		{
 			if (gameState == State.SplashScreen) {
 				SS.render(g2d);
-			} else if(gameState == State.GameMenu) {
-				display.renderSprite(200, 200, Sprite.splash, true);
-				//display.renderSprite(x,y); //renders new frame
+			} else if(gameState == State.Game) {
+				display.renderBG(0, 0); //renders new frame
+				player.render(display);
+				player2.render(display);
+				//display.renderPlayer(15, height - 32, Sprite.player1);
+				//display.renderPlayer(50, height - 32, Sprite.player2);
 			//////////////////////////////////////////////////////
 				for (int i = 0; i < pixels.length; i++) {
 					pixels[i] = display.pixels[i];
@@ -94,11 +100,11 @@ public class Game extends Canvas implements Runnable {
 		bs.show();
 	}
 	
-	public int getWindowWidth() {
-		return width * scale;
+	public static int getWindowWidth() {
+		return width; //* scale;
 	}	
-	public int getWindowHeight() {
-		return height * scale;
+	public static int getWindowHeight() {
+		return height; //* scale;
 	}
 	
 	public synchronized void start() {

@@ -7,7 +7,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.util.Timer;
-import java.util.TimerTask;
+
 
 import com.djdarkside.game.Game;
 import com.djdarkside.game.graphics.Display;
@@ -40,36 +40,45 @@ public class SplashScreen {
 		
 	//Splash Screen Sequence	
 		if (show && seq == 0) {			
-			alpha += 0.00005f;
+			alpha += 0.00008f;
 			g2d.drawString("Created by", 75 + time, 175+time);
 	    	if (alpha >= 0.8f) { 
 	    		alpha = 0.0f;
 	    		seq = 1;
-	    		delay();
 	    		show = false;	    		
 	    	}  
 		}
     	show = true;
 		if (show && seq == 1) {
-			alpha += 0.00005f;
-			g2d.drawString("Mitchell Baptist", game.getWindowWidth() / 2 - 150, 175 + time);
+			alpha += 0.00008f;
+			g2d.drawString("Mitchell Baptist", game.getWindowWidth() / 2 - 150, 100 + time);
 	    	if (alpha >= 0.8f) { 
 	    		alpha = 0.0f;
 	    		seq = 2;
-	    		delay();
 	    		show = false;	    		
 	    	}    	
 		}
 		show = true;
 		if (show && seq == 2) {
-			alpha += 0.00005f;
+			alpha += 0.00008f;
 			g.drawString("2016", game.getWindowWidth() - 150, game.getWindowHeight()-20);
 	    	if (alpha >= 0.8f) { 
 	    		alpha = 0.0f;
 	    		seq = 3;
-	    		delay();
 	    		show = false;	    		
 	    	} 
+		}
+		show = true;
+		if (show && seq == 3) {
+			//delay();
+			alpha += 0.00008f;
+			g.drawString("Loading", game.getWindowWidth() / 2 - 25, game.getWindowHeight() / 2 -20);		
+	    	if (alpha >= 0.8f) { 
+	    		alpha = 0.0f;
+	    		seq = 4;
+	    		game.gameState = State.Game; 
+	    		show = false;	
+	    	}			
 		}
 	}
 	
@@ -81,7 +90,7 @@ public class SplashScreen {
 	
 	private void delay() {
 		try {
-			Thread.sleep(750);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
