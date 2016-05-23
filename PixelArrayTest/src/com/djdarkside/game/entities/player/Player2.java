@@ -1,4 +1,4 @@
-package com.djdarkside.game.player;
+package com.djdarkside.game.entities.player;
 
 import com.djdarkside.game.Game;
 import com.djdarkside.game.gameStates.State;

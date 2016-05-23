@@ -3,7 +3,7 @@ package com.djdarkside.game.keyboard;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import com.djdarkside.game.player.Player;
+import com.djdarkside.game.entities.player.Player;
 
 public class Keyboard implements KeyListener {
 

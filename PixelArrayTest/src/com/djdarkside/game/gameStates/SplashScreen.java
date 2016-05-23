@@ -27,6 +27,7 @@ public class SplashScreen {
 	public SplashScreen(Game game, Display display) {
 		this.game = game;
 		this.display = display;
+		System.out.println(Game.getWindowWidth() * Game.scale);
 	}
 	
 	public void render(Graphics g) {	
@@ -51,7 +52,7 @@ public class SplashScreen {
     	show = true;
 		if (show && seq == 1) {
 			alpha += 0.00008f;
-			g2d.drawString("Mitchell Baptist", game.getWindowWidth() / 2 - 150, 100 + time);
+			g2d.drawString("Mitchell Baptist", (Game.getWindowWidth() * Game.scale) / 2 - 150, 100 + time);
 	    	if (alpha >= 0.8f) { 
 	    		alpha = 0.0f;
 	    		seq = 2;
@@ -61,7 +62,7 @@ public class SplashScreen {
 		show = true;
 		if (show && seq == 2) {
 			alpha += 0.00008f;
-			g.drawString("2016", game.getWindowWidth() - 150, game.getWindowHeight()-20);
+			g.drawString("2016", (Game.getWindowWidth() * Game.scale) - 150, (Game.getWindowHeight() * Game.scale) -20);
 	    	if (alpha >= 0.8f) { 
 	    		alpha = 0.0f;
 	    		seq = 3;
@@ -72,7 +73,7 @@ public class SplashScreen {
 		if (show && seq == 3) {
 			//delay();
 			alpha += 0.00008f;
-			g.drawString("Loading", game.getWindowWidth() / 2 - 25, game.getWindowHeight() / 2 -20);		
+			g.drawString("Loading", (Game.getWindowWidth() * Game.scale) / 2 - 25, (Game.getWindowHeight() * Game.scale) / 2 -20);		
 	    	if (alpha >= 0.8f) { 
 	    		alpha = 0.0f;
 	    		seq = 4;
